@@ -2,9 +2,8 @@ package vc
 
 import io.gatling.core.Predef._
 import io.gatling.core.structure._
-import vc.Feeders._
 
-object CommonScenario{
+object CommonScenario {
   def apply(): ScenarioBuilder = new CommonScenario().scn
 }
 
