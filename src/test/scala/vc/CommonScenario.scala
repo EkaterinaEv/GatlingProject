@@ -10,28 +10,12 @@ object CommonScenario{
 
 class CommonScenario {
 
-  val loginGroup: ChainBuilder = group("my login"){
-    exec(Actions.login)
-      .exec(Actions.me)
-  }
-
   val scn: ScenarioBuilder = scenario("Common scenario")
-    .feed(myFeed)
-    .feed(users)
+    .feed(Feeders.users)
     .exec(Actions.getMainPage)
-    .pause(1,3)
-    .randomSwitch(
-      20.0 -> exec(Actions.getPopular),
-      80.0 -> exec(Actions.getNew)
-    )
-    .exec(Actions.getCourses)
-    .repeat(3, "i")(
-      exec(Actions.discovery)
-    )
-    .exec(
-      tryMax(2)(
-        loginGroup
-      )
-    )
+    .pause(1, 3)
+    .exec(Actions.getNavbar)
+    .pause(1, 3)
+    .exec(Actions.login)
 
 }

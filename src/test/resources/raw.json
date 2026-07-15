@@ -1,5 +1,5 @@
 {
-  "values[email]": "#{login}",
-  "values[password]": "#{password}",
+  "values[Username]": "#{username}",
+  "values[Password]": "#{password}",
   "mode": "raw"
 }

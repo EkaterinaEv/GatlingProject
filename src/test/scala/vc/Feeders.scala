@@ -6,8 +6,6 @@ import io.gatling.http.Predef._
 
 object Feeders {
 
-  val myFeed: BatchableFeederBuilder[String] = csv("myWords.csv").random.eager
-
   val users: BatchableFeederBuilder[String] = csv("users.csv").circular
 
 }
