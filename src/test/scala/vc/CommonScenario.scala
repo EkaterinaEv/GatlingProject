@@ -18,5 +18,9 @@ class CommonScenario {
     .exec(Actions.getNavbar) // Загружаем навигацию и извлекаем userSession
     .pause(1, 3)
     .exec(Actions.login) // Используем userSession
+    .pause(1, 3)
+    .exec(Actions.goToFlights) // Переход на страницу выбора рейсов
+    .pause(1, 3)
+    .exec(Actions.goToReservation) // Переход на страницу поиска рейсов
 
 }

@@ -38,5 +38,16 @@ object Actions {
     .check(regex("User password was correct").exists)
     .check(css("title").is("Web Tours"))
 
+  // Переход на страницу выбора рейсов
+  val goToFlights: HttpRequestBuilder = http("goToFlights")
+    .get("/cgi-bin/nav.pl?page=menu&in=flights")
+    .check(status.is(200))
+    .check(regex("Flights").exists)
+
+  // Переход на страницу поиска рейсов
+  val goToReservation: HttpRequestBuilder = http("goToReservation")
+    .get("/cgi-bin/reservations.pl?page=welcome")
+    .check(status.is(200))
+    .check(css("title").is("Flight Selections"))
 
 }
