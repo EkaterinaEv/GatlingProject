@@ -29,12 +29,14 @@ object Actions {
   val login: HttpRequestBuilder = http("login")
     .post("/cgi-bin/login.pl")
     .formParam("userSession", "#{userSession}")
-    .formParam("Username", "#{username}")
-    .formParam("Password", "#{password}")
+    .formParam("username", "#{username}")
+    .formParam("password", "#{password}")
     .formParam("login.x", "69")
     .formParam("login.y", "3")
     .formParam("JSFormSubmit", "off")
     .check(status.is(200))
-    .check(bodyString.is("User password was correct"))
+    .check(regex("User password was correct").exists)
+    .check(css("title").is("Web Tours"))
+
 
 }
