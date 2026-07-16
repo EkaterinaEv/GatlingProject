@@ -11,19 +11,15 @@ object Actions {
     .check(status.is(200))
     .check(css("title").is("Web Tours"))
 
-  // Создаем сессию и получаем MSO cookie
   val createSession: HttpRequestBuilder = http("createSession")
     .get("/cgi-bin/welcome.pl?signOff=true")
     .check(status.is(200))
-    // Сохраняем MSO cookie для использования в следующих запросах
     .check(headerRegex("Set-Cookie", "MSO=([^;]+)").saveAs("msoCookie"))
 
-  // Загружаем навигацию и извлекаем userSession из скрытого поля формы
   val getNavbar: HttpRequestBuilder = http("getNavbar")
     .get("/cgi-bin/nav.pl?in=home")
     .check(status.is(200))
     .check(css("title").is("Web Tours Navigation Bar"))
-    // Извлекаем userSession из скрытого поля input
     .check(css("input[name='userSession']", "value").saveAs("userSession"))
 
   val login: HttpRequestBuilder = http("login")
@@ -38,25 +34,22 @@ object Actions {
     .check(regex("User password was correct").exists)
     .check(css("title").is("Web Tours"))
 
-  // Переход на страницу выбора рейсов
   val goToFlights: HttpRequestBuilder = http("goToFlights")
     .get("/cgi-bin/nav.pl?page=menu&in=flights")
     .check(status.is(200))
     .check(regex("Flights").exists)
 
-  // Переход на страницу поиска рейсов
   val goToReservation: HttpRequestBuilder = http("goToReservation")
     .get("/cgi-bin/reservations.pl?page=welcome")
     .check(status.is(200))
     .check(css("title").is("Flight Selections"))
 
-  // Поиск рейсов
   val findFlight: HttpRequestBuilder = http("findFlight")
     .post("/cgi-bin/reservations.pl")
     .formParam("advanceDiscount", "0")
-    .formParam("depart", "Frankfurt")
+    .formParam("depart", "#{departCity}")
     .formParam("departDate", "07/17/2026")
-    .formParam("arrive", "Denver")
+    .formParam("arrive", "#{arriveCity}")
     .formParam("returnDate", "07/18/2026")
     .formParam("numPassengers", "1")
     .formParam("seatPref", "None")
@@ -68,10 +61,8 @@ object Actions {
     .formParam(".cgifields", "seatPref")
     .check(status.is(200))
     .check(css("title").is("Flight Selections"))
-    // Сохраняем первый доступный рейс для выбора
     .check(regex("""name="outboundFlight".*?value="([^"]*)"""").saveAs("outboundFlight"))
 
-  // Выбор рейса
   val selectFlight: HttpRequestBuilder = http("selectFlight")
     .post("/cgi-bin/reservations.pl")
     .formParam("outboundFlight", "#{outboundFlight}")
@@ -84,7 +75,6 @@ object Actions {
     .check(status.is(200))
     .check(css("title").is("Flight Reservation"))
 
-  // Покупка билета
   val buyTicket: HttpRequestBuilder = http("buyTicket")
     .post("/cgi-bin/reservations.pl")
     .formParam("firstName", "Kate")
@@ -108,7 +98,6 @@ object Actions {
     .check(status.is(200))
     .check(css("title").is("Reservation Made!"))
 
-  // Возврат на главную страницу
   val goHome: HttpRequestBuilder = http("goHome")
     .get("/cgi-bin/welcome.pl?page=menus")
     .check(status.is(200))

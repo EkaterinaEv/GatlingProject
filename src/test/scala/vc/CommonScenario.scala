@@ -3,32 +3,46 @@ package vc
 import io.gatling.core.Predef._
 import io.gatling.core.structure.ScenarioBuilder
 
+import scala.util.Random
+
 object CommonScenario {
   def apply(): ScenarioBuilder = new CommonScenario().scn
 }
 
 class CommonScenario {
 
+  private val citiesList = List("Denver", "Frankfurt", "London", "Los Angeles", "Paris",
+    "Portland", "San Francisco", "Seattle", "Sydney", "Zurich")
+
+  private val cityPairs = Iterator.continually {
+    val shuffled = Random.shuffle(citiesList)
+    Map(
+      "departCity" -> shuffled.head,
+      "arriveCity" -> shuffled.tail.head
+    )
+  }
+
   val scn: ScenarioBuilder = scenario("Common scenario")
     .feed(Feeders.users)
-    .exec(Actions.getMainPage) // Загружаем главную страницу
+    .feed(cityPairs)
+    .exec(Actions.getMainPage)
     .pause(1, 3)
-    .exec(Actions.createSession) // Создаем сессию (получаем MSO cookie)
+    .exec(Actions.createSession)
     .pause(1, 3)
-    .exec(Actions.getNavbar) // Загружаем навигацию и извлекаем userSession
+    .exec(Actions.getNavbar)
     .pause(1, 3)
-    .exec(Actions.login) // Используем userSession
+    .exec(Actions.login)
     .pause(1, 3)
-    .exec(Actions.goToFlights) // Переход на страницу выбора рейсов
+    .exec(Actions.goToFlights)
     .pause(1, 3)
-    .exec(Actions.goToReservation) // Переход на страницу поиска рейсов
+    .exec(Actions.goToReservation)
     .pause(1, 3)
-    .exec(Actions.findFlight) // Поиск рейсов
+    .exec(Actions.findFlight)
     .pause(1, 3)
-    .exec(Actions.selectFlight) // Выбор рейса
+    .exec(Actions.selectFlight)
     .pause(1, 3)
-    .exec(Actions.buyTicket) // Покупка билета
+    .exec(Actions.buyTicket)
     .pause(1, 3)
-    .exec(Actions.goHome) // Возврат на главную страницу
+    .exec(Actions.goHome)
 
 }
