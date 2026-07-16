@@ -1,4 +1,4 @@
-[0m[[0m[0mdebug[0m] [0m[0mjavaOptions: Vector(-Djnidispatch.path=C:\Users\EKATER~1\AppData\Local\Temp\jna-598068103\jna11216002758472007510.dll, -XX:+HeapDumpOnOutOfMemoryError, -XX:MaxInlineLevel=20, -XX:MaxTrivialSize=12, -Xmx1G, --add-opens=java.base/java.lang=ALL-UNNAMED, --add-opens=java.base/jdk.internal.misc=ALL-UNNAMED)[0m
+[0m[[0m[0mdebug[0m] [0m[0mjavaOptions: Vector(-Djnidispatch.path=C:\Users\EKATER~1\AppData\Local\Temp\jna-598068103\jna18298478235739536677.dll, -XX:+HeapDumpOnOutOfMemoryError, -XX:MaxInlineLevel=20, -XX:MaxTrivialSize=12, -Xmx1G, --add-opens=java.base/java.lang=ALL-UNNAMED, --add-opens=java.base/jdk.internal.misc=ALL-UNNAMED)[0m
 [0m[[0m[0mdebug[0m] [0m[0mForking tests - parallelism = false[0m
 [0m[[0m[0mdebug[0m] [0m[0mCreate a single-thread test executor[0m
 [0m[[0m[0mdebug[0m] [0m[0mRunner for io.gatling.sbt.GatlingFramework produced 1 initial tasks for 1 tests.[0m
