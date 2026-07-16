@@ -22,5 +22,11 @@ class CommonScenario {
     .exec(Actions.goToFlights) // Переход на страницу выбора рейсов
     .pause(1, 3)
     .exec(Actions.goToReservation) // Переход на страницу поиска рейсов
+    .pause(1, 3)
+    .exec(Actions.findFlight) // Поиск рейсов
+    .pause(1, 3)
+    .exec(Actions.selectFlight) // Выбор рейса
+    .pause(1, 3)
+    .exec(Actions.buyTicket) // Покупка билета
 
 }
