@@ -28,5 +28,7 @@ class CommonScenario {
     .exec(Actions.selectFlight) // Выбор рейса
     .pause(1, 3)
     .exec(Actions.buyTicket) // Покупка билета
+    .pause(1, 3)
+    .exec(Actions.goHome) // Возврат на главную страницу
 
 }

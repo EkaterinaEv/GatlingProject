@@ -108,4 +108,10 @@ object Actions {
     .check(status.is(200))
     .check(css("title").is("Reservation Made!"))
 
+  // Возврат на главную страницу
+  val goHome: HttpRequestBuilder = http("goHome")
+    .get("/cgi-bin/welcome.pl?page=menus")
+    .check(status.is(200))
+    .check(css("title").is("Web Tours"))
+
 }
