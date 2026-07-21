@@ -5,7 +5,6 @@
 /project/project/
 /project/target/
 *.log
-*.html
 /example/target/
 /example/example.iml
 *.sc
