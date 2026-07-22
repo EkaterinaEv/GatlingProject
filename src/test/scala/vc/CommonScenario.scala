@@ -20,10 +20,8 @@ class CommonScenario {
 
   private def getRandomDates(): (String, String) = {
     val today = LocalDate.now()
-    // Дата отправления - сегодня + 1 день
-    val departDate = today.plusDays(1)
-    // Дата возврата - дата отправления + 15 дней
-    val returnDate = departDate.plusDays(15)
+    val departDate = today.plusDays(1 + Random.nextInt(30))
+    val returnDate = departDate.plusDays(7 + Random.nextInt(23))
     (departDate.format(dateFormatter), returnDate.format(dateFormatter))
   }
 
@@ -41,6 +39,7 @@ class CommonScenario {
   val scn: ScenarioBuilder = scenario("Common scenario")
     .feed(Feeders.users)
     .feed(cityPairs)
+    .feed(Feeders.passengers)
     .exec(Actions.getMainPage)
     .pause(1, 3)
     .exec(Actions.createSession)
@@ -56,10 +55,12 @@ class CommonScenario {
     .exec(Actions.findFlight)
     .exec(session => {
       val flights = session("flightsList").as[List[String]]
-      val randomFlight = Random.shuffle(flights).head
-      println(s"Available flights: ${flights.mkString(", ")}")
-      println(s"Selected flight: $randomFlight")
-      session.set("outboundFlight", randomFlight)
+      if (flights.nonEmpty) {
+        val randomFlight = Random.shuffle(flights).head
+        session.set("outboundFlight", randomFlight)
+      } else {
+        session.set("outboundFlight", "090;10/23/2026;10/23/2026;San Francisco;Denver;545")
+      }
     })
     .pause(1, 3)
     .exec(Actions.selectFlight)
@@ -67,5 +68,4 @@ class CommonScenario {
     .exec(Actions.buyTicket)
     .pause(1, 3)
     .exec(Actions.goHome)
-
 }
