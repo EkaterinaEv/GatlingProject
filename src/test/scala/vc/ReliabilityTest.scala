@@ -10,10 +10,6 @@ class ReliabilityTest extends Simulation {
   private val TARGET_USERS = 80
   private val TEST_DURATION = 1.hour
 
-  println(s"Тест надежности:")
-  println(s"Нагрузка: $TARGET_USERS пользователей (80% от максимума)")
-  println(s"Длительность: ${TEST_DURATION.toHours} час")
-
   private val scn = CommonScenario()
 
   setUp(

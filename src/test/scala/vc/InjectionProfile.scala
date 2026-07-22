@@ -10,13 +10,6 @@ class InjectionProfile extends Simulation {
   private val STEP_USERS = MAX_USERS / 10 // 10 пользователей = 10%
   private val STEP_DURATION = 5.minutes // Длительность каждой ступени
 
-  println(s"Ступенчатый тест:")
-  println(s"Максимум: $MAX_USERS пользователей")
-  println(s"Шаг: $STEP_USERS пользователей (10%)")
-  println(s"Длительность ступени: ${STEP_DURATION.toMinutes} минут")
-  println(s"Всего ступеней: 10")
-  println(s"Общее время: ~${STEP_DURATION.toMinutes * 10} минут")
-
   private val scn = CommonScenario()
 
   setUp(

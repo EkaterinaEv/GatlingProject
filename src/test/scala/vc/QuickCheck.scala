@@ -11,15 +11,6 @@ class QuickCheck extends Simulation {
   private val STEP_USERS = 10
   private val STEP_DURATION = 1.minute
 
-  println(s"========================================")
-  println(s"ПРОБНЫЙ ТЕСТ")
-  println(s"========================================")
-  println(s"Ступень 1: $STEP_USERS пользователей (10%)")
-  println(s"Ступень 2: ${STEP_USERS * 2} пользователей (20%)")
-  println(s"Длительность ступени: ${STEP_DURATION.toSeconds} секунд")
-  println(s"Общее время: ~${STEP_DURATION.toSeconds * 2 + 60} секунд")
-  println(s"========================================")
-
   private val scn = CommonScenario()
 
   setUp(
