@@ -98,6 +98,7 @@ object Actions {
     .formParam(".cgifields", "saveCC")
     .check(status.is(200))
     .check(css("title").is("Reservation Made!"))
+    .check(regex("#{firstName}#{lastName}'s Flight Invoice").exists)
 
   val goHome: HttpRequestBuilder = http("goHome")
     .get("/cgi-bin/welcome.pl?page=menus")
